@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{- .Site.LanguageCode | default "en-US" -}}" class="">
+	{{- partial "head.html" . -}}
+	<body>
+		<a id="skip-to-content" href="#main-content">Go to the content.</a>
+		<a id="skip-to-navigation" href="#navigation">Go to navigation bar.</a>
+		<div id="profile-picture">
+			<a aria-label="Link to homepage" href="{{- .Site.BaseURL -}}"><svg viewBox="0 0 1 1"></svg></a>
+		</div>
+		{{- partial "header.html" . -}}
+		{{- partial "navigation.html" . -}}
+		<div id="content-container">
+			{{- block "main" . -}}{{- end -}}
+			{{- partial "footer.html" . -}}
+		</div>
+		{{- partial "scripts.html" . -}}
+	</body>
+</html>

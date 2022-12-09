@@ -1,0 +1,37 @@
+#metadata {
+  display: grid;
+  padding: (0.3 * $val-gap-content) $val-gap-content;
+  gap: .5rem;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  font-size: .9rem;
+  background-color: var(--clr-bg-content-child);
+  .creation-info {
+    display: flex;
+    .author {
+      display: grid;
+      grid-auto-flow: column;
+      gap: .4em;
+      align-items: center;
+      i {
+        font-size: .8em;
+        @include no-selection;
+      }
+      a {
+        text-decoration: none;
+        color: var(--clr-text);
+        &:focus, &:hover {
+          text-decoration: underline;
+          color: inherit;
+        }
+      }
+    }
+    .faded {
+      white-space: pre-wrap;
+      opacity: .7;
+    }
+  }
+  .tags {
+    justify-content: flex-end;
+  }
+}

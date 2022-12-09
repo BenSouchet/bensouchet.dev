@@ -1,0 +1,30 @@
+$clr-text-dark: hsb-to-hsla(215, 3, 97);
+html.dark {
+  --clr-text: #{$clr-text-dark};
+  --clr-text-link: #{$clr-primary};
+  --clr-text-link-hover: #{scale-color($clr-primary, $saturation: 20%, $lightness: 50%)};
+  --clr-text-header: #{hsb-to-hsla(215, 3, 85)};
+  --clr-text-hgroup-p: #{hsb-to-hsla(215, 10, 70)};
+  --clr-text-footer: #{hsb-to-hsla(215, 10, 60)};
+
+  --clr-border: #{hsb-to-hsla(215, 14, 18)};
+  --clr-border-table: #{change-color($clr-text-dark, $alpha: .4)};
+  --clr-border-title: #{change-color($clr-text-dark, $alpha: .3)};
+  --clr-border-project-info: #{change-color($clr-text-dark, $alpha: .2)};
+  --clr-border-img: #{change-color($clr-text-dark, $alpha: .1)};
+
+  --clr-hr: #{change-color($clr-text-dark, $alpha: .4)};
+
+  --clr-bg-page: #{hsb-to-hsla(215, 14, 12)};
+  --clr-bg-page-lighter: #{hsb-to-hsla(215, 14, 16)};
+  --clr-bg-imglink: #{hsb-to-hsla(215, 14, 12, .9)};
+  --clr-bg-footer: #{hsb-to-hsla(215, 14, 16)};
+  --clr-bg-project-button-title: #{hsb-to-hsla(215, 14, 16, 0.94)};
+  --clr-bg-link-lightbox: #{hsb-to-hsla(215, 14, 17, 0.9)};
+  --clr-bg-content-child: #{hsb-to-hsla(215, 14, 19)};
+  --clr-bg-content: #{hsb-to-hsla(215, 14, 22)};
+  --clr-bg-hgroup: #{hsb-to-hsla(215, 14, 26)};
+
+  --clr-bg-nav: #{change-color(scale-color($clr-primary, $saturation: 0%, $lightness: 0%), $alpha: .9)};
+  --clr-bg-nav-accent: #{change-color(scale-color($clr-primary, $saturation: 0%, $lightness: -20%), $alpha: .9)};
+}

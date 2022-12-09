@@ -1,0 +1,23 @@
+{{- if in (slice "section" "term") .Kind -}}
+{{- $taxonomy := .Section -}}
+{{- $currentPage := . -}}
+{{- if eq .Kind "section" -}}
+{{- $taxonomy = (print (singularize .Section) "/tags") -}}
+{{- end -}}
+<div id="list-tags">
+	<div class="tags">
+		{{- if eq .Kind "section" -}}
+		<span class="tag" rel="tag">All</span>
+		{{- else -}}
+		<a href="{{- .Scratch.Get "all_url" -}}" class="tag" rel="tag">All</a>
+		{{- end -}}
+		{{- range $termName, $termObj := index .Site.Taxonomies $taxonomy -}}
+		{{ if (eq $termObj.Page $currentPage) }}
+		<span class="tag" rel="tag">{{- $termObj.Page.Title -}}</span>
+		{{- else -}}
+		<a href="{{- $termObj.Page.Permalink -}}" class="tag" rel="tag">{{- $termObj.Page.Title -}}</a>
+		{{- end -}}
+		{{- end -}}
+	</div>
+</div>
+{{- end -}}

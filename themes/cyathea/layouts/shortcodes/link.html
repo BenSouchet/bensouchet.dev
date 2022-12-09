@@ -1,0 +1,3 @@
+{{- $url := .Get "href" -}}
+{{- if hasPrefix $url "/" -}}{{- $url = ($url | absURL) -}}{{- end -}}
+<a href="{{- $url -}}"{{- with .Get "rel" }} rel="{{- . -}}"{{- end -}}{{ with .Get "target" }} target="{{- . -}}"{{- end -}}>{{- .Inner | $.Page.RenderString -}}</a>

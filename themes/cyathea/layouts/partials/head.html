@@ -1,0 +1,19 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{{- $pageTitle := .Title -}}
+	{{- if eq .Kind "term" -}}
+	{{- $pageTitle = (print .Title " " (pluralize (index (split .Section "/") 0))) -}}
+	{{- end -}}
+	{{- $title := (cond (.IsHome) .Site.Title (print .Site.Title " - " $pageTitle)) -}}
+	<title>{{- $title -}}</title>
+	<meta property="og:title" content="{{- $title -}}">
+	{{- partial "seo.html" . -}}
+	{{- if .Site.Params.themeStyle.useFontAwesome -}}
+	<link href="{{- "/assets/fonts/fontawesome/fa-regular-400.woff2" | absURL -}}" rel="preload" as="font" type="font/woff2" crossOrigin="anonymous">
+	{{- end -}}
+	{{- $style := resources.Get "sass/style.scss" | resources.ExecuteAsTemplate "style.scss" . | resources.ToCSS (dict "transpiler" "dartsass" "outputstyle" "compressed" "targetPath" "assets/css/style.css") | resources.Minify | resources.Fingerprint -}}
+	<link rel="stylesheet" href="{{- $style.Permalink -}}" rel="stylesheet preload prefetch" as="style" type="text/css">
+	{{- partial "siteverification.html" . -}}
+	{{- if os.FileExists "assets/html/custom-head.html" -}}{{- "assets/html/custom-head.html" | readFile | safeHTML -}}{{- end -}}
+</head>

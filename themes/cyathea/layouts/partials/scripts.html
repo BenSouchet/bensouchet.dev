@@ -1,0 +1,7 @@
+{{ $scriptList := slice }}
+
+{{ $scriptList = append (resources.Get "js/darkmode.js") $scriptList }}
+{{ $scriptList = append (resources.Get "js/lightbox.js") $scriptList }}
+
+{{ $scripts := $scriptList | resources.Concat "js/app.js" | minify | fingerprint }}
+<script type="text/javascript" src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}" media="screen"></script>

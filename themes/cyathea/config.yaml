@@ -1,0 +1,27 @@
+taxonomies:
+  tag: tags
+  category: categories
+  project/tag: project/tags
+
+permalinks:
+  pages: /:slug/
+  posts: /:year/:month/:title/
+  projects: /project/:slug/
+  project/tags: /projects/tag/:slug/
+
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+    renderer:
+      unsafe: true
+      hardWraps: true
+  highlight:
+    lineNos: true
+
+frontmatter:
+  lastmod:
+    - lastmod
+    - :fileModTime
+    - :default

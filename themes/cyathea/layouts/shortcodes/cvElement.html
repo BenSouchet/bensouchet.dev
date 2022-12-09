@@ -1,0 +1,39 @@
+{{- $isHeader := (.Get "grouped") -}}
+{{- $asImage := (and (.Get "logoUrl") (.Get "company")) -}}
+<div class="cv-element{{- if $isHeader }} header{{- end -}}">
+	{{- if $asImage -}}
+	<img src="{{- .Get "logoUrl" -}}" title="{{- .Get "company" }} logo">
+	{{- else -}}
+	<div class="linked-position"><div class="circle"></div><div class="vertical-bar"></div></div>
+	<div>
+	{{- end -}}
+	<div class="information">
+		{{- if (.Get "company") -}}
+		<span class="company">{{- .Get "company" -}}</span>
+		{{- end -}}
+		{{- $startDate := time.AsTime "02 Jan 2006" -}}
+		{{- $endDate := time.AsTime "02 Jan 2006" -}}
+		{{- $delimiter := `<br/>` -}}
+		{{- if (.Get "title") -}}
+		<span class="title">{{- .Get "title" -}}</span>
+		{{- $delimiter = "  |  " -}}
+		{{- end -}}
+		<span class="additional">{{- $startDate.Format "Jan 2006" }} - {{ $endDate.Format "Jan 2006" }} (6 mos){{- if (.Get "location") -}}{{- $delimiter | safeHTML -}}{{- .Get "location" -}}{{- end -}}</span>
+	</div>
+	{{- if not $isHeader -}}
+	{{- if $asImage -}}
+	<div></div>
+	{{- end -}}
+	<div class="description">
+		<span>{{- .Inner | $.Page.RenderString (dict "display" "block") -}}</span>
+	</div>
+	{{- end -}}
+	{{- if not $asImage -}}
+	</div>
+	{{- end -}}
+</div>
+{{- if $isHeader -}}
+<div class="cv-element-postions">
+{{- .Inner | safeHTML -}}
+</div>
+{{- end -}}

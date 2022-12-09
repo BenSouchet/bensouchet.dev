@@ -1,0 +1,30 @@
+$clr-text-light: hsb-to-hsla(215, 3, 12);
+html {
+  --clr-text: #{$clr-text-light};
+  --clr-text-link: #{scale-color($clr-primary, $saturation: 20%, $lightness: -30%)};
+  --clr-text-link-hover: #{$clr-primary};
+  --clr-text-header: #{hsb-to-hsla(215, 3, 24)};
+  --clr-text-hgroup-p: #{hsb-to-hsla(215, 10, 40)};
+  --clr-text-footer: #{hsb-to-hsla(215, 10, 50)};
+
+  --clr-border: #{hsb-to-hsla(215, 0, 96)};
+  --clr-border-table: #{change-color($clr-text-light, $alpha: .4)};
+  --clr-border-title: #{change-color($clr-text-light, $alpha: .3)};
+  --clr-border-project-info: #{change-color($clr-text-light, $alpha: .2)};
+  --clr-border-img: #{change-color($clr-text-light, $alpha: .1)};
+
+  --clr-hr: #{change-color($clr-text-light, $alpha: .4)};
+
+  --clr-bg-page: #{hsb-to-hsla(215, 0, 94)};
+  --clr-bg-page-lighter: #{hsb-to-hsla(215, 0, 100)};
+  --clr-bg-imglink: #{hsb-to-hsla(215, 0, 98, .9)};
+  --clr-bg-footer: #{hsb-to-hsla(215, 0, 92)};
+  --clr-bg-project-button-title: #{hsb-to-hsla(215, 0, 94, 0.94)};
+  --clr-bg-link-lightbox: #{hsb-to-hsla(215, 0, 93, 0.7)};
+  --clr-bg-content-child: #{hsb-to-hsla(215, 0, 94)};
+  --clr-bg-content: #{hsb-to-hsla(215, 0, 100)};
+  --clr-bg-hgroup: #{hsb-to-hsla(215, 0, 97)};
+
+  --clr-bg-nav: #{change-color(scale-color($clr-primary, $saturation: 0%, $lightness: -10%), $alpha: .9)};
+  --clr-bg-nav-accent: #{change-color(scale-color($clr-primary, $saturation: 0%, $lightness: -30%), $alpha: .9)};
+}

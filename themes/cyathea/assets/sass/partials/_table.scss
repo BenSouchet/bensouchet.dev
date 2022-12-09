@@ -1,0 +1,15 @@
+table {
+  @include rounded-corners;
+  border: .0625rem solid var(--clr-border-table);
+  border-spacing: 0;
+  overflow: hidden;
+}
+th, td {
+  padding: .375rem;
+  &:not(:last-of-type) {
+    border-right: .0625rem solid var(--clr-border-table);
+  }
+}
+th, tbody tr:not(:last-of-type) td {
+  border-bottom: .0625rem solid var(--clr-border-table);
+}

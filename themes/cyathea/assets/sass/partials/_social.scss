@@ -1,0 +1,21 @@
+#top-links {
+  @include ul-remove-default-style;
+  grid-column: 2;
+  justify-self: end;
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: center;
+  column-gap: .75rem;
+  padding: .75rem 1.5rem;
+  width: fit-content;
+  li {
+    font-size: 1.75em;
+  }
+  a {
+    display: flex;
+    color: var(--clr-text-header);
+    &:hover, &:focus {
+      @include hover-glow;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<header role="banner">
+	<h1 aria-label="Site name"><a href="{{- .Site.BaseURL -}}">{{- .Site.Title -}}</a></h1>
+	{{if isset .Site.Menus "sociallinks"}}
+	<ul id="top-links" role="navigation" aria-label="Social links">
+		{{- range .Site.Menus.sociallinks -}}
+		<li><a title="{{- .Name -}}" target="_blank" rel="noopener external" href="{{- .URL -}}">{{- .Pre -}}</a></li>
+		{{- end -}}
+	</ul>
+	{{- end -}}
+</header>

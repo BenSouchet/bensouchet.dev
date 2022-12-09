@@ -1,0 +1,38 @@
+@mixin rounded-corners {
+  border-radius: .375rem;
+}
+@mixin first-last-no-margin {
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+@mixin heading-default {
+  box-sizing: border-box;
+  @include first-last-no-margin;
+  .ico {
+    font-size: .86em;
+  }
+}
+@mixin no-selection {
+  -webkit-touch-callout: none;/* iOS Safari */
+    -webkit-user-select: none;/* Safari */
+     -khtml-user-select: none;/* Konqueror HTML */
+       -moz-user-select: none;/* Old versions of Firefox */
+        -ms-user-select: none;/* Internet Explorer/Edge */
+            user-select: none;/* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+@mixin hover-glow {
+  color: var(--clr-text-link);
+  filter: drop-shadow(0 0 $val-drop-shadow-header var(--clr-text-link));
+}
+@mixin ul-remove-default-style {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  a {
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,339 @@
+@charset "utf-8";
+
+/* Set primary color variable (if defined) */
+{{- if isset .Site.Params.themeStyle "primarycolorvalue" -}}
+$clr-primary-value: {{- .Site.Params.themeStyle.primaryColorValue -}};
+{{- else if isset .Site.Params.themeStyle "primarycolorname" -}}
+$clr-primary-name: {{- .Site.Params.themeStyle.primaryColorName -}};
+{{- end -}}
+
+/* Colors */
+@import "colors";
+
+/* Normalization between browsers */
+@import "vendor/normalize";
+
+/* Variables */
+$font-family:                 "{{- .Site.Params.themeStyle.fontFamily               | default "Source Sans 3" -}}";
+$font-family-variable:        "{{- .Site.Params.themeStyle.fontFamilyVariable       | default .Site.Params.themeStyle.font_family | default "Source Sans 3 VF" -}}";
+$font-family-code:            "{{- .Site.Params.themeStyle.fontFamilyCode           | default "Monaco" -}}";
+
+$path-image-profile:          "{{- .Site.Params.pathImageProfile                    | default (resources.Get "/images/default/profile_image.jpg").Permalink -}}";
+{{- if isset .Site.Params "pathimageprofile" -}}
+$path-image-profile: "../../" + $path-image-profile;
+{{- end -}}
+$path-image-bg-pattern:       "{{- .Site.Params.themeStyle.pathBgPattern            | default (resources.Get "/images/default/dots_pattern.png").Permalink -}}";
+$path-image-bg-pattern-x2:    "{{- .Site.Params.themeStyle.pathBgPatternHighRez     | default (resources.Get "/images/default/dots_pattern_x2.png").Permalink -}}";
+
+$val-padding-body:            {{- .Site.Params.themeStyle.valuePaddingBody          | default "40px" -}};
+$val-gap-content:             {{- .Site.Params.themeStyle.valueGapContent           | default "26px" -}};
+$val-width-sidebar:           {{- .Site.Params.themeStyle.valueWidthSidebar         | default "180px" -}};
+$val-border-size:             {{- .Site.Params.themeStyle.valueBorderSize           | default "4px" -}};
+$val-gap-grid:                {{- .Site.Params.themeStyle.valueGapGrid              | default "30px" -}};
+$val-rounded-corner:          {{- .Site.Params.themeStyle.valueRoundedCorner        | default "14px" -}};
+$val-drop-shadow-header:      {{- .Site.Params.themeStyle.valueDropShadowHeader     | default "0.0625rem" -}};
+$val-gradient-angle-nav:      {{- .Site.Params.themeStyle.valueGradientAngleNav     | default "205deg" -}};
+$val-gradient-angle-nav-side: {{- .Site.Params.themeStyle.valueGradientAngleNavSide | default "180deg" -}};
+
+/* Add font definition (if required) */
+{{- if (or (and (not (isset .Site.Params.themeStyle "fontfamily")) (not (isset .Site.Params.themeStyle "fontfamilyvariable"))) (or (eq .Site.Params.themeStyle.fontFamily "Source Sans 3") (eq .Site.Params.themeStyle.fontFamilyVariable "Source Sans 3 VF"))) -}}
+/* Nothing specified or Source Sans 3 */
+@import "fonts/sourcesans3";
+{{- end -}}
+
+/* Add FontAwesome (if enabled) */
+{{- if .Site.Params.themeStyle.useFontAwesome -}}
+@import "fonts/fontawesome";
+{{- end -}}
+
+::-moz-selection {
+  color: var(--clr-text-selection);
+  background: var(--clr-bg-selection);
+}
+::selection {
+  color: var(--clr-text-selection);
+  background: var(--clr-bg-selection);
+}
+a {
+  color: var(--clr-text-link);
+  &:visited {
+    color: var(--clr-text-link);
+  }
+  &:hover, &:focus {
+    color: var(--clr-text-link-hover);
+  }
+}
+
+/* Import partials */
+@import "partials";
+
+/* Main declarations */
+html, body, blockquote, header, main, nav, footer, #content {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+div, ul, li, img, a, svg {
+  box-sizing: border-box;
+}
+html, body {
+  overscroll-behavior: none;
+}
+html {
+  scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  background-color: var(--clr-bg-page);
+}
+body {
+  display: grid;
+  column-gap: $val-gap-grid;
+  grid-template-columns: $val-width-sidebar minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto;
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: $val-padding-body;
+  min-height: 100%;
+  font-family: $font-family, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--clr-text);
+}
+@supports (font-variation-settings: normal) {
+  /* The browser support variable fonts */
+  body {
+    font-family: $font-family-variable, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  }
+}
+blockquote {
+  @include rounded-corners;
+  position: relative;
+  font-style: italic;
+  background-color: var(--clr-bg-content-child);
+  margin: 0;
+  border-left: $val-border-size solid var(--clr-primary-accent);
+  padding: .5rem .625rem .5rem 2.875rem;
+  &::before {
+    content: "\201C";
+    color: var(--clr-primary-accent);
+    font-size: 3.6em;
+    line-height: 1em;
+    position: absolute;
+    left: .625rem;
+    top: .625rem;
+  }
+  p {
+    margin-block-start: .4em;
+    margin-block-end: .4em;
+  }
+  > span {
+    display: block;
+    font-style: normal;
+    font-weight: bold;
+    margin-block-end: .4em;
+  }
+}
+h1 {
+  font-size: 2.125em;
+  font-weight: 600;
+  margin-bottom: .5em;
+  @include heading-default;
+}
+h2 {
+  font-size: 1.65em;
+  margin-bottom: .625em;
+  @include heading-default;
+}
+h3 {
+  font-size: 1.40em;
+  margin-bottom: .75em;
+  @include heading-default;
+}
+h4 {
+  font-size: 1.25em;
+  font-weight: 600;
+  @include heading-default;
+}
+h5 {
+  font-weight: normal;
+  @include heading-default;
+}
+hr {
+  color: var(--clr-hr);
+  border-style: solid;
+  border-radius: 50%;
+}
+img {
+  height: auto;
+  max-width: 100%;
+  @include no-selection;
+}
+p {
+  margin: 0.875em 0;
+  @include first-last-no-margin;
+  > br {
+    content: "";
+    display: block;
+    height: .4rem;
+  }
+}
+header {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  h1 {
+    grid-column: 1;
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    padding: .5rem 1.25rem;
+    a, a:visited {
+      color: var(--clr-text-header);
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      @include hover-glow;
+    }
+  }
+  h1, ul {
+    border: $val-border-size solid var(--clr-border);
+    border-radius: 0 $val-rounded-corner $val-rounded-corner;
+    background-color: var(--clr-bg-page-lighter);
+  }
+}
+main {
+  height: fit-content;
+  margin-top: $val-gap-grid;
+  background-color: var(--clr-bg-footer);
+  background: linear-gradient(180deg, var(--clr-bg-content) 50%, var(--clr-bg-footer) 50%);
+  border-radius: 0 $val-rounded-corner 0 0;
+  border: $val-border-size solid var(--clr-border);
+  border-bottom-width: 0;
+  overflow: hidden;
+  > section, > article {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  hgroup {
+    padding: 1.875rem $val-gap-content 1.25rem;
+    background-color: var(--clr-bg-hgroup);
+    h1, p {
+      margin: 0;
+    }
+    h1 {
+      line-height: initial;
+    }
+    p {
+      font-size: 1.25em;
+      font-weight: 500;
+      color: var(--clr-text-hgroup-p);
+    }
+  }
+}
+#skip-to-content,
+#skip-to-navigation {
+  position: absolute;
+  left: ($val-padding-body + $val-border-size);
+  padding: .25rem 0 .375rem;
+  width: ($val-width-sidebar - (2 * $val-border-size));
+  text-align: center;
+  font-size: .9em;
+  border-radius: 0 0 $val-rounded-corner $val-rounded-corner;
+  background-color: var(--clr-bg-content);
+  border-top-width: 0;
+  transform: translateY(calc(-1 * (100% + #{$val-padding-body})));
+  transition: transform 325ms ease-in-out;
+  &:focus {
+    transform: translateY((-1 * $val-padding-body));
+  }
+}
+#profile-picture {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  border-radius: 0 $val-rounded-corner 0 0;
+  border: $val-border-size solid var(--clr-border);
+  border-bottom-width: 0;
+  $gradient-angle: (360deg - ($val-gradient-angle-nav-side - 180deg));
+  background-color: var(--clr-bg-nav);
+  a {
+    display: block;
+    position: relative;
+    height: 100%;
+    border-radius: 0 $val-rounded-corner $val-rounded-corner;
+    background: radial-gradient(circle, var(--clr-primary-accent) 80%, transparent 100%);
+  }
+  svg {
+    $border-radius: ($val-rounded-corner - $val-border-size);
+    display: block;
+    width: auto;
+    height: auto;
+    background: url(#{$path-image-profile}) left top/cover no-repeat;
+    border-radius: 0 $border-radius $border-radius;
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+    &:hover {
+      opacity: .8;
+    }
+  }
+}
+#content-container {
+  grid-column: 2;
+  grid-row: 2 / 4;
+}
+#content {
+  font-size: 1.1rem;
+  padding: (1.5 * $val-gap-content) $val-gap-content $val-gap-content;
+  background-color: var(--clr-bg-content);
+  border-radius: 0 0 $val-rounded-corner $val-rounded-corner;
+  img {
+    @include rounded-corners;
+  }
+}
+footer {
+  grid-column: 2;
+  grid-row: 4;
+  color: var(--clr-text-footer);
+  font-size: .875em;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  grid-template-columns: 1fr;
+  padding: .5rem $val-gap-content;
+  border-radius: 0 0 $val-rounded-corner $val-rounded-corner;
+  background-color: var(--clr-bg-footer);
+  border: $val-border-size solid var(--clr-border);
+  border-top-width: 0;
+  #copyright, #light-switch {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  #light-switch {
+    justify-self: end;
+  }
+}
+
+/* Background pattern CSS rules */
+/* Add only if backgroundPattern is not defined, or defined but not set to empty or false */
+{{- if or (ne (isset .Site.Params.themeStyle "backgroundpattern") true) (and (ne .Site.Params.themeStyle.backgroundPattern "") (ne .Site.Params.themeStyle.backgroundPattern false)) -}}
+html {
+  background-image: url($path-image-bg-pattern), linear-gradient(180deg, var(--clr-bg-page-lighter) 0px, var(--clr-bg-page) 800px);
+  /* Add x2 version if nothing is defined (default), or only if High Rez is defined */
+  {{- if (or (ne (isset .Site.Params.themeStyle "backgroundpattern") true) (isset .Site.Params.themeStyle "backgroundPatternhighrez")) -}}
+  background-image: -webkit-image-set(url($path-image-bg-pattern) 1x, url($path-image-bg-pattern-x2) 2x), linear-gradient(180deg, var(--clr-bg-page-lighter) 0px, var(--clr-bg-page) 800px);
+  {{- end -}}
+  background-position: center top;
+  background-repeat: {{- .Site.Params.themeStyle.backgroundPatternRepeat | default "repeat-x" -}};
+}
+{{- end -}}
+
+/* Add the custom CSS */
+{{- if (or (os.FileExists "assets/css/custom.scss") (os.FileExists "assets/css/custom.css")) -}}
+@import "../../../../assets/css/custom";
+{{- end -}}
+

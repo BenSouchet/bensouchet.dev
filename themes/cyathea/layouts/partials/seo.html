@@ -1,0 +1,41 @@
+<meta property="og:site_name" content="{{- .Site.Title -}}">
+<link rel="canonical" href="{{- .Site.BaseURL -}}">
+<meta property="og:url" content="{{- .Permalink -}}">
+{{- $description := cond (ne .Params.description "") .Params.description (cond (isset .Site.Params "description") .Site.Params.description "") -}}
+{{- if eq .Kind "term" -}}
+	{{- $term := .Title -}}
+	{{- $parentPageName := (pluralize (index (split .Section "/") 0)) -}}
+	{{- with .Site.GetPage (print "/" $parentPageName) -}}
+		{{- if isset .Params "term_description" -}}
+			{{- $description = (replace .Params.term_description "{}" (lower $term) 1) -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+<meta name="description" content="{{- $description -}}">
+<meta property="og:description" content="{{- $description -}}">
+<meta property="og:locale" content="{{- .Site.LanguageCode -}}">
+<meta property="og:type" content="{{- if .IsPage -}}article{{- else -}}website{{- end -}}">
+{{- with $.Params.images -}}
+	{{- range first 6 . -}}<meta property="og:image" content="{{- . | absURL -}}" />{{- end -}}
+{{- else -}}
+	{{- $images := $.Resources.ByType "image" -}}
+	{{- $featured := $images.GetMatch "*feature*" -}}
+	{{- if not $featured -}}{{- $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}{{- end -}}
+	{{- with $featured -}}
+		<meta property="og:image" content="{{- $featured.Permalink -}}"/>
+	{{- else -}}
+		{{- with $.Site.Params.images -}}<meta property="og:image" content="{{- index . 0 | absURL -}}"/>{{- end -}}
+	{{- end -}}
+{{- end -}}
+{{- if isset .Site.Params "pathImageProfile" -}}
+	<meta property="og:image" content="{{- .Site.Params.pathImageProfile | absURL -}}"/>
+{{- else -}}
+	<meta property="og:image" content="{{- (resources.Get "/images/default/profile_image.jpg").Permalink -}}"/>
+{{- end -}}
+{{- if .IsPage -}}
+	{{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
+	<meta property="article:section" content="{{- .Section -}}" />
+	{{- with .PublishDate -}}<meta property="article:published_time" {{ .Format $iso8601 | printf "content=%q" | safeHTMLAttr -}} />{{- end -}}
+	{{- with .Lastmod -}}<meta property="article:modified_time" {{ .Format $iso8601 | printf "content=%q" | safeHTMLAttr -}} />{{- end -}}
+{{- end -}}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
