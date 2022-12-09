@@ -1,6 +1,0 @@
-{{- if (and (isset .Site.Params "siteverification") (isset .Site.Params.siteVerification "google")) -}}
-<meta name="google-site-verification" content="{{- .Site.Params.siteVerification.google -}}">
-{{- end -}}
-{{- if (and (isset .Site.Params "siteverification") (isset .Site.Params.siteVerification "pinterest")) -}}
-<meta name="p:domain_verify" content="{{- .Site.Params.siteVerification.pinterest -}}">
-{{- end -}}

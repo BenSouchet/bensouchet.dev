@@ -1,8 +1,0 @@
-{{- range ( first 1 ( where .Site.RegularPages "Type" "projects" ).ByDate.Reverse ) -}}
-<a href="{{- .Permalink -}}" class="button project-button h140">
-{{- $image := .Resources.GetMatch "*_cover.*" -}}
-{{- $image := $image.Crop "750x140" -}}
-<img src="{{- $image.Permalink -}}" alt="{{- .Title -}}" class="bright-hover">
-<span class="title">{{- .Title }} <i class="far fa-arrow-alt-circle-right icon-arrow-link"></i></span>
-</a>
-{{- end -}}
