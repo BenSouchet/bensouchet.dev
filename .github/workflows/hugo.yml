@@ -32,9 +32,18 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     env:
-      HUGO_VERSION: 0.102.3
+      HUGO_VERSION: 0.108.0
     steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # Fetch **all** history (not just deploy commit) for Hugo's .GitInfo and .Lastmod
+          # See https://discourse.gohugo.io/t/problems-with-gitinfo-in-ci/22480
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb \
