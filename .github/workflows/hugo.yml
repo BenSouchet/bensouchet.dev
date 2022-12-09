@@ -58,7 +58,7 @@ jobs:
           cd $RUNNER_TEMP
           curl -sSL -o dart-sass.tar.gz https://github.com/sass/dart-sass-embedded/releases/download/${{ env.DART_SASS_VERSION }}/sass_embedded-${{ env.DART_SASS_VERSION }}-linux-x64.tar.gz
           tar zxf dart-sass.tar.gz
-          mv ./dart-sass/sass $HOME/.local/bin/
+          mv ./dart-sass/dart-sass-embedded $HOME/.local/bin/
       - name: Add to the PATH
         run: echo "$GITHUB_WORKSPACE/sass_embedded" >> $GITHUB_PATH
       - name: Checkout
