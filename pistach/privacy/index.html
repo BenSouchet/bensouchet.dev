@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pistach · Privacy policy</title>
+    <meta name="description" content="Privacy policy of Pistach, a personal planner app by Ben Souchet." />
+    <link rel="canonical" href="https://bensouchet.dev/pistach/privacy/" />
+    <link rel="icon" type="image/png" href="/pistach/pistach.png" />
+    <link href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;600;700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/pistach/pistach.css" />
+</head>
+<body>
+    <main>
+        <a class="back" href="/pistach/">← Pistach</a>
+        <h1>Privacy policy</h1>
+        <p class="meta">Last updated: 1 November 2026</p>
+
+        <p>Pistach is a personal planner app built by Ben Souchet for his own use. This page explains what data it accesses, why, where it is kept and how to remove it.</p>
+
+        <section>
+            <h2>Data Pistach accesses</h2>
+            <p>Only from accounts the owner explicitly connects in the app:</p>
+            <ul>
+                <li><strong>Google Calendar</strong> (read and write): events from the calendars the owner enables, so they appear in Pistach; events the owner creates in Pistach are written back to the chosen calendar.</li>
+                <li><strong>Gmail</strong> (read-only): sender, subject, date and the short snippet of unread or starred messages from the last days. Pistach never sends, deletes or modifies email, and doesn't store message bodies.</li>
+                <li><strong>Google Drive</strong> (metadata only): names, types and modification dates of recently modified files. Pistach never reads file contents.</li>
+                <li><strong>Basic profile</strong> (email address, name) to identify which account was connected.</li>
+                <li><strong>Slack</strong> (read-only, if connected): messages that mention the owner and direct messages sent to the owner.</li>
+                <li>Tasks, reminders, events and countdowns the owner creates in Pistach.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>How it is used</h2>
+            <p>This data is used only to show the owner their own schedule and to prepare their morning recap: what's on today, what's overdue, what's coming up and which messages may need a reply. It isn't used for advertising, profiling, analytics or any other purpose.</p>
+            <p>To write the recap, the relevant data is processed by Claude (Anthropic) under the owner's own Claude account, at the owner's request.</p>
+        </section>
+
+        <section>
+            <h2>Google API Services: Limited Use</h2>
+            <p>Pistach's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. Google user data is not sold, not used for advertising, not used to train generalised AI or machine-learning models, and is not transferred to anyone except as necessary to provide the features described above to the owner.</p>
+        </section>
+
+        <section>
+            <h2>Storage and security</h2>
+            <ul>
+                <li>Data is stored in a private Supabase database hosted in the European Union (Paris), protected by row-level security so it is accessible only to the owner's account.</li>
+                <li>OAuth tokens are stored server-side only, in a table no client can read, and are never sent to the phone.</li>
+                <li>All connections use HTTPS.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Retention and deletion</h2>
+            <ul>
+                <li>Disconnecting an account in Pistach deletes its tokens and the events imported from it.</li>
+                <li>Access can also be revoked at any time from <a href="https://myaccount.google.com/permissions">Google Account → Third-party connections</a> (or Slack → Manage apps).</li>
+                <li>Gmail and Drive information is read when a recap is prepared and isn't kept beyond the recap text itself.</li>
+                <li>Everything can be deleted on request.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Sharing</h2>
+            <p>No data is sold or shared with third parties, apart from the infrastructure providers needed to run the app (Supabase for storage, Anthropic for the recap) acting on the owner's behalf.</p>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <p>Ben Souchet · <a href="mailto:pistach@bensouchet.dev">pistach@bensouchet.dev</a></p>
+        </section>
+    </main>
+</body>
+</html>
